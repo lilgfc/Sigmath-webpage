@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zxx">
+    <head>
+        <!--================= Meta tag =================-->
+        <meta charset="utf-8">
+        <title>Áreas</title>
+        <meta name="description" content="">
+        <!--================= Responsive Tag =================-->
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--================= Favicon =================-->
+        <link rel="apple-touch-icon" href="assets/images/simbolo.png">
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/simbolo.png">        
+        <!--================= Bootstrap V5 css =================-->
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <!--================= Menus css =================-->
+        <link rel="stylesheet" type="text/css" href="assets/css/menus.css">               
+        <!--================= Animate css =================-->
+        <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+        <!--================= Owl Carousel css =================-->
+        <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.css">
+        <!--================= Elegant icon css  =================-->
+        <link rel="stylesheet" type="text/css" href="assets/fonts/elegant-icon.css">
+        <!--================= Magnific Popup css =================-->
+        <link rel="stylesheet" type="text/css" href="assets/css/magnific-popup.css">
+        <!--================= Animations css =================-->
+        <link rel="stylesheet" type="text/css" href="assets/css/animations.css">  
+        <!--================= style css =================-->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <!--================= Custom Spacing css =================-->
+        <link rel="stylesheet" type="text/css" href="assets/css/custom-spacing.css">
+        <!--================= Responsive css =================-->
+        <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            .areas__container{
+                max-width: 1320px;
+                margin: 0 auto;
+                padding-left: 60px;
+                padding-right: 60px;
+            }
+            .areas__section {
+                background: #ffffff;
+                padding: 100px 0 100px;
+                position: relative;
+                overflow: hidden;
+            }
+            .areas__section::before {
+                content: '';
+                position: absolute;
+                top: -80px; right: -80px;
+                width: 300px; height: 300px;
+                background: linear-gradient(135deg, #b3e04a 0%, #3de0c8 100%);
+                clip-path: polygon(0 0, 100% 0, 100% 100%);
+                opacity: 0.15;
+                pointer-events: none;
+            }
+            .areas__section::after {
+                content: '';
+                position: absolute;
+                bottom: -60px; left: -60px;
+                width: 240px; height: 240px;
+                background: linear-gradient(135deg, #ff6b8a 0%, #4dabf7 100%);
+                clip-path: polygon(0 0, 0 100%, 100% 100%);
+                opacity: 0.15;
+                pointer-events: none;
+            }
+        
+            .areas__intro { text-align: center; margin-bottom: 64px; }
+            .areas__intro .label {
+                display: inline-block;
+                font-family: 'Space Mono', monospace;
+                font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+                color: #07094a;
+                background: rgba(7, 9, 74, 0.07);
+                border: 1px solid rgba(7, 9, 74, 0.15);
+                padding: 6px 18px; border-radius: 100px; margin-bottom: 20px;
+            }
+            .areas__intro h2 {
+                font-family: 'DM Sans', sans-serif;
+                font-size: clamp(28px, 4vw, 46px); font-weight: 700;
+                color: #07094a; line-height: 1.2; margin-bottom: 20px;
+            }
+            .areas__intro h2 em { font-style: normal; color: #ff6b8a; }
+            .areas__intro p {
+                color: #444;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 17px; max-width: 560px; margin: 0 auto; line-height: 1.7;
+            }
+        
+            .areas__tabs {
+                display: flex; justify-content: center;
+                gap: 12px; flex-wrap: wrap; margin-bottom: 48px;
+            }
+            .area-tab-btn {
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 600; font-size: 19px;
+                padding: 10px 24px; border-radius: 13px;
+                border: 2px solid #e0e0e0; cursor: pointer;
+                transition: all 0.25s ease;
+                background: #f5f5f5;
+                color: #555;
+            }
+            .area-tab-btn[data-area="educacion"].active,
+            .area-tab-btn[data-area="educacion"]:hover {
+                border-color: #ff6b8a; color: #ff6b8a; background: rgba(255,107,138,0.08);
+            }
+            .area-tab-btn[data-area="estudio"].active,
+            .area-tab-btn[data-area="estudio"]:hover {
+                border-color: #4dabf7; color: #4dabf7; background: rgba(77,171,247,0.08);
+            }
+            .area-tab-btn[data-area="gestion"].active,
+            .area-tab-btn[data-area="gestion"]:hover {
+                border-color: #c0bb88; color: #c0bb88; background: rgba(122,184,46,0.08);
+            }
+            .area-tab-btn[data-area="marketing"].active,
+            .area-tab-btn[data-area="marketing"]:hover {
+                border-color: #18b5a0; color: #18b5a0; background: rgba(24,181,160,0.08);
+            }
+        
+            .area-panel { display: none; animation: fadeSlideUp 0.4s ease; }
+            .area-panel.active { display: block; }
+            @keyframes fadeSlideUp {
+                from { opacity: 0; transform: translateY(20px); }
+                to   { opacity: 1; transform: translateY(0); }
+            }
+        
+            .panel__header {
+                display: flex; align-items: flex-end; gap: 24px;
+                margin-bottom: 40px; padding-bottom: 32px;
+                border-bottom: 1px solid #e8e8e8;
+            }
+            .panel__header-number {
+                font-family: 'Space Mono', monospace;
+                font-size: 200px; font-weight: 700; line-height: 1;
+                opacity: 0.08; color: #07094a; user-select: none; flex-shrink: 0;
+            }
+            .panel__header-text h3 {
+                font-family: 'DM Sans', sans-serif;
+                font-size: clamp(26px, 3.5vw, 38px); font-weight: 700;
+                color: #07094a; margin-bottom: 10px;
+            }
+            .panel__header-text p {
+                color: #555;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 20px; line-height: 1.6; margin: 0; max-width: 560px;
+            }
+            .panel__header-accent { width: 48px; height: 4px; border-radius: 4px; margin-top: 14px; }
+        
+            .roles__grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 28px;
+            }
+            .role-card{
+            padding: 36px;
+            border-radius: 22px;
+            }
+            .role-card {
+                background: #fafafa;
+                border: 1px solid #ececec;
+                
+                transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+                position: relative; overflow: hidden;
+            }
+            .role-card::after {
+                content: ''; position: absolute;
+                bottom: 0; left: 0; right: 0; height: 3px;
+                border-radius: 0 0 20px 20px; opacity: 0; transition: opacity 0.25s;
+            }
+            .role-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+            }
+            .role-card:hover::after { opacity: 1; }
+            .role-card__icon {
+                width: 44px; height: 44px; border-radius: 12px;
+                display: flex; align-items: center; justify-content: center;
+                margin-bottom: 18px; font-size: 20px;
+            }
+            .role-card__title {
+                font-family: 'DM Sans', sans-serif;
+                font-size: 22px; font-weight: 700;
+                margin-bottom: 10px; line-height: 1.3;
+            }
+            .role-card__desc {
+                font-family: 'DM Sans', sans-serif;
+                font-size: 18px; color: #666; line-height: 1.65; margin: 0;
+            }
+            .role-card__tag {
+                display: inline-block; margin-top: 14px;
+                font-family: 'Space Mono', monospace;
+                font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+                padding: 4px 10px; border-radius: 100px;
+                background: #f0f0f0; color: #888;
+            }
+        
+            /* Area accent colors — adapted for white bg */
+            #panel-educacion .panel__header-text h3 { color: #e8456a; }
+            #panel-educacion .panel__header-accent { background: #e8456a; }
+            #panel-educacion .role-card:hover { border-color: rgba(232,69,106,0.25); }
+            #panel-educacion .role-card::after { background: #e8456a; }
+            #panel-educacion .role-card__icon { background: rgba(232,69,106,0.1); }
+            #panel-educacion .role-card__title { color: #e8456a; }
+        
+            #panel-estudio .panel__header-text h3 { color: #2a8fd4; }
+            #panel-estudio .panel__header-accent { background: #2a8fd4; }
+            #panel-estudio .role-card:hover { border-color: rgba(42,143,212,0.25); }
+            #panel-estudio .role-card::after { background: #2a8fd4; }
+            #panel-estudio .role-card__icon { background: rgba(42,143,212,0.1); }
+            #panel-estudio .role-card__title { color: #2a8fd4; }
+        
+            #panel-gestion .panel__header-text h3 { color: #c0bb88; }
+            #panel-gestion .panel__header-accent { background: #c0bb88; }
+            #panel-gestion .role-card:hover { border-color: rgba(106,158,31,0.25); }
+            #panel-gestion .role-card::after { background: #c0bb88; }
+            #panel-gestion .role-card__icon { background: rgba(106,158,31,0.1); }
+            #panel-gestion .role-card__title { color: #c0bb88; }
+        
+            #panel-marketing .panel__header-text h3 { color: #12968a; }
+            #panel-marketing .panel__header-accent { background: #12968a; }
+            #panel-marketing .role-card:hover { border-color: rgba(18,150,138,0.25); }
+            #panel-marketing .role-card::after { background: #12968a; }
+            #panel-marketing .role-card__icon { background: rgba(18,150,138,0.1); }
+            #panel-marketing .role-card__title { color: #12968a; }
+        
+            .areas__cta {
+                margin-top: 64px; text-align: center; padding: 48px 32px;
+                background: #07094a;
+                border-radius: 24px;
+            }
+            .areas__cta h4 {
+                font-family: 'DM Sans', sans-serif;
+                font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 10px;
+            }
+            .areas__cta p { color: rgba(255,255,255,0.65); font-family: 'DM Sans', sans-serif; font-size: 15px; margin-bottom: 28px; }
+            .areas__cta a {
+                display: inline-block; font-family: 'DM Sans', sans-serif;
+                font-weight: 700; font-size: 15px; padding: 14px 36px; border-radius: 100px;
+                background: linear-gradient(135deg, #ff6b8a, #b3e04a 50%, #3de0c8);
+                color: #07094a; text-decoration: none;
+                transition: opacity 0.2s, transform 0.2s;
+            }
+            .areas__cta a:hover { opacity: 0.88; transform: translateY(-2px); color: #07094a; text-decoration: none; }
+        
+            @media (max-width: 576px) {
+                .panel__header { flex-direction: column; align-items: flex-start; gap: 8px; }
+                .panel__header-number { font-size: 48px; }
+                .roles__grid { grid-template-columns: 1fr; }
+                .area-tab-btn { font-size: 13px; padding: 8px 18px; }
+            }
+        </style>
+    </head>
+    <body> 
+        <!--================= Preloader Section Start Here =================-->        
+        <div id="react__preloader">
+            <div id="react__circle_loader"></div>
+            <div class="react__loader_logo"><img src="assets/images/preload.png" alt="Preload"></div>
+        </div>        
+        <!--================= Preloader Section End Here =================-->
+ 
+        <!--================= Header Section Start Here =================-->
+        <header id="react-header" class="react-header react-header-three">
+            <div class="menu-part">
+                <div class="container">
+                    <!--================= Menu Start Here =================-->
+                    <div class="react-main-menu">
+                        <nav>
+                            <!--================= Menu Toggle btn =================-->
+                            <div class="menu-toggle">
+                                <div class="logo"><a href="index.html" class="logo-text"> <img src="assets/images/ChatGPT Image Mar 13, 2026, 03_07_22 PM (1).png" alt="logo"> </a></div>
+                                <button type="button" id="menu-btn">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <!--================= Menu Structure =================--> 
+                            <div class="react-inner-menus">
+                                <div class="cate-part">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                                    <ul class="react-category-menu">
+                                        <li><a href="#">I Festimath <i class="arrow_carrot-down"></i></a> 
+                                            <ul>
+                                                <li><a href="https://drive.google.com/file/d/1hX-i7GbJ4U9P4gGfcAzZT4doUlDSGkdh/view?usp=drive_link">Bases</a></li>
+                                                <li><a href="blog.html">Día 1 & 2</a></li>
+                                                <li><a href="https://www.instagram.com/p/DCRyCZ8xGtv/?img_index=1">Día 3</a></li>
+                        
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ul id="backmenu" class="react-menus react-sub-shadow">
+                                    <li> <a href="#">Events</a>
+                                        <ul>
+                                            <li> <a href="https://www.instagram.com/p/DKF9HxsNX4U/?img_index=1">SUMVISSION</a></li>
+                                            <li> <a href="https://www.instagram.com/p/C8gNbOMs4Ot/?img_index=1">MAHASA</a></li>
+                                            <li> <a href="https://www.instagram.com/p/C2nhgaMI9Su/?img_index=1">Summer Camp</a></li>
+                                            <li> <a href="https://www.instagram.com/p/C0XQkW_Pd6R/?img_index=1">1er Desafío STEM</a></li>
+                                            <li> <a href="https://www.instagram.com/p/DD0R2WaB8Hl/?img_index=1">Chocolab</a></li>
+                                            <li> <a href="ihttps://www.instagram.com/p/C5rgMIssMgw/?img_index=1">Agilidad Mental</a></li>
+                                            <li> <a href="https://www.instagram.com/p/C6eHS0xsv9r/?img_index=1">Aventura Matemática</a></li>
+                                            <li> <a href="https://www.instagram.com/p/Cvdrh_isYBp/">ONEM F2 & F3</a></li>
+                                            
+                                        </ul>
+                                    </li>
+                                    <li> <a href="#">Webinars</a>
+                                        <ul>
+                                            <li> <a href="https://www.instagram.com/p/CtVEf7cMai6/?img_index=1">MATH OLYMPICS - OMCC</a></li> 
+                                            <li> <a href="https://www.instagram.com/p/Ctuuv7vJNlN/?img_index=1">MATH OLYMPICS - Iberoamericana</a></li> 
+                                            <li> <a href="https://www.instagram.com/p/CuA3Sn0sUbT/">MATH OLYMPICS - PAGMO</a></li> 
+                                            <li> <a href="https://www.instagram.com/p/CuNqgAbsPUi/">MATH OLYMPICS - EGMO I</a></li> 
+                                            <li> <a href="https://www.instagram.com/p/CudRi02MgqO/?img_index=1">MATH OLYMPICS - EGMO II</a></li> 
+                                            <li> <a href="https://www.instagram.com/p/Cups_iYvYMg/?img_index=1">MATH OLYMPICS - Cono Sur</a></li> 
+                                            <li> <a href="https://www.instagram.com/p/Cu28Fh5s9GL/">MATH OLYMPICS - IMO</a></li> 
+                                            <li> <a href="https://www.instagram.com/p/C6NeXR1s5az/">CONAMAT y más</a></li> 
+                                        </ul>
+                                    </li>                                                                   
+                                    <li> <a href="#">Ponencias</a>
+                                        <ul>
+                                            <li><a href="https://www.instagram.com/p/C3i0nX4PV9C/?img_index=1">Excelencia Académica</a></li>                                                
+                                            <li><a href="https://www.instagram.com/p/C3i09PgP0e3/?img_index=1">Éxito escolar</a></li>
+                                            <li><a href="https://www.instagram.com/p/C3q0o06MDsQ/?img_index=1">Talento peruano femenino STEM</a></li>
+                                            <li><a href="https://www.instagram.com/p/C4JBXTkLWHZ/?img_index=1">Día Internacional de la Mujer</a></li>                                    
+                                        </ul>
+                                    </li>
+                                    <li> <a href="areas.html">Áreas</a>
+                                        
+                                    </li>
+                                    
+                                    
+                                </ul>                                
+                                
+                            </div>
+                        </nav>
+                    </div>
+                    <!--=================  Back Menu End Here  =================-->
+                </div>
+            </div>
+        </header>
+        <!--================= Header Section End Here =================-->
+ 
+        <!--================= Wrapper Start Here =================-->
+        <div class="react-wrapper">
+            <div class="react-wrapper-inner">
+                <!--================= Breadcrumbs Section Start Here =================-->
+                <div class="react-breadcrumbs jaja">
+                    <div class="breadcrumbs-wrap">
+                        <div class="breadcrumbs-inner">
+                            <div class="container">
+                                <div class="breadcrumbs-text">
+                                    <h1 class="breadcrumbs-title">Áreas</h1>
+                                    <div class="back-nav">
+                                        <ul>
+                                            <li><a href="index.html">Inicio</a></li>
+                                            <li>Nosotros</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                </div>
+                <!--================= Breadcrumbs Section End Here =================-->
+ 
+                <!--=================  About Section Start Here ================= -->
+                <!--================= Areas Section Start Here =================-->
+                <div class="areas__section">
+                    <div class="areas__container">
+ 
+                        <!-- Intro -->
+                        <div class="areas__intro" id="conectamos">
+                            
+                            <h2>Conectamos jóvenes de Latinoamérica<br>con <em>oportunidades reales</em></h2>
+                            <p>Elige el área que mejor conecte con tus habilidades y pasión. Cada rol es una oportunidad de crecer, liderar y generar impacto.</p>
+                        </div>
+ 
+                        <!-- Tab Navigation -->
+                        <div class="areas__tabs">
+                            <button class="area-tab-btn active" data-area="educacion" onclick="switchTab('educacion', this)">Educación</button>
+                            <button class="area-tab-btn" data-area="estudio" onclick="switchTab('estudio', this)">Estudio Creativo</button>
+                            <button class="area-tab-btn" data-area="gestion" onclick="switchTab('gestion', this)">Gestión de Proyectos</button>
+                            <button class="area-tab-btn" data-area="marketing" onclick="switchTab('marketing', this)">Marketing</button>
+                        </div>
+ 
+                        <!-- ===== PANEL: EDUCACIÓN ===== -->
+                        <div class="area-panel active" id="panel-educacion">
+                            <div class="panel__header">
+                                <div class="panel__header-number">01</div>
+                                <div class="panel__header-text">
+                                    <h2>Educación</h2>
+                                    <p>Diseña, facilita y mejora experiencias de aprendizaje matemático para jóvenes de toda Latinoamérica usando nuestra metodología Rimaykuy.</p>
+                                    <div class="panel__header-accent"></div>
+                                </div>
+                            </div>
+                            <div class="roles__grid">
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Facilitador/a de Aprendizaje</div>
+                                    <p class="role-card__desc">Diseña y dicta sesiones educativas dinámicas aplicando la metodología Rimaykuy</p>
+                                    
+                                </div>
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Desarrollador/a de Contenido Educativo</div>
+                                    <p class="role-card__desc">Crea materiales innovadores que fomenten el aprendizaje interactivo</p>
+                                    
+                                </div>
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Especialista en Metodología y Evaluación</div>
+                                    <p class="role-card__desc">Investiga y mejora continuamente las estrategias pedagógicas de SigMATH, analizando resultados para lograr una enseñanza cada vez más efectiva</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <!-- ===== PANEL: ESTUDIO CREATIVO ===== -->
+                        <div class="area-panel" id="panel-estudio">
+                            <div class="panel__header">
+                                <div class="panel__header-number">02</div>
+                                <div class="panel__header-text">
+                                    <h2>Estudio Creativo</h2>
+                                    <p>Comunica las matemáticas de forma atractiva a través de la escritura, el video y la estrategia de contenido digital.</p>
+                                    <div class="panel__header-accent"></div>
+                                </div>
+                            </div>
+                            <div class="roles__grid">
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Redactor/a de Divulgación Matemática</div>
+                                    <p class="role-card__desc">Diseña y dicta sesiones educativas con nuestra metodología Rimaykuy</p>
+                                    
+                                </div>
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Editor/a Audiovisual</div>
+                                    <p class="role-card__desc">Edita reels y videos educativos incorporando efectos visuales, animaciones y sonido para potenciar el impacto e incrementar el alcance</p>
+                                    
+                                </div>
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Estratega de Contenido Digital</div>
+                                    <p class="role-card__desc">Monitorea tendencias en ciencia y educación para proponer ideas de contenido innovador</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <!-- ===== PANEL: GESTIÓN DE PROYECTOS ===== -->
+                        <div class="area-panel" id="panel-gestion">
+                            <div class="panel__header">
+                                <div class="panel__header-number">03</div>
+                                <div class="panel__header-text">
+                                    <h2>Gestión de Proyectos</h2>
+                                    <p>Lidera la organización y ejecución de actividades virtuales y presenciales, y construye alianzas que expandan el impacto de SigMATH.</p>
+                                    <div class="panel__header-accent"></div>
+                                </div>
+                            </div>
+                            <div class="roles__grid">
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Coordinador/a de Eventos</div>
+                                    <p class="role-card__desc">Lidera y organiza actividades asegurando una ejecución exitosa tanto en Lima como en entornos virtuales para toda Latinoamérica.</p>
+                                    <span class="role-card__tag">Presencial: Lima, Perú <b> Virtual: Latinoamérica</span>
+                                </div>
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Analista de Impacto y Sostenibilidad</div>
+                                    <p class="role-card__desc">Evalúa los resultados de nuestros proyectos y propone mejoras estratégicas</p>
+                                </div>
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Gestor/a de Alianzas y Relaciones Institucionales</div>
+                                    <p class="role-card__desc">Busca y consolida colaboraciones con organizaciones y aliados estratégicos</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <!-- ===== PANEL: MARKETING ===== -->
+                        <div class="area-panel" id="panel-marketing">
+                            <div class="panel__header">
+                                <div class="panel__header-number">04</div>
+                                <div class="panel__header-text">
+                                    <h2>Marketing</h2>
+                                    <p>Amplifica la voz de SigMATH construyendo comunidad, identidad visual y producciones multimedia que inspiren a más jóvenes a sumarse.</p>
+                                    <div class="panel__header-accent"></div>
+                                </div>
+                            </div>
+                            <div class="roles__grid">
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Community Manager</div>
+                                    <p class="role-card__desc">Maneja las redes sociales y gestiona la interacción respondiendo mensajes y fomentando la participación</p>
+                                    
+                                </div>
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Coordinador/a de Branding y Diseño Visual</div>
+                                    <p class="role-card__desc">Desarrolla y cuida la identidad visual de SigMATH, creando materiales gráficos atractivos</p>
+                                    
+                                </div>
+                                <div class="role-card">
+                                    
+                                    <div class="role-card__title">Productor/a Audiovisual</div>
+                                    <p class="role-card__desc">Crea videos, reels y recursos multimedia creativos para promocionar nuestras iniciativas, eventos y programas</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <!-- CTA -->
+                        <div class="areas__cta">
+                            <h4>¿Listo para ser parte de este equipo?</h4>
+                            <p>Descubre nuestras áreas y encuentra el rol perfecto para ti.</p>
+                            <a href="https://www.instagram.com/p/DGMlXAQNwXg/?img_index=1">Postular ahora →</a>
+                        </div>
+ 
+                    </div>
+                </div>
+                <!--================= Areas Section End Here =================-->
+ 
+            </div>
+        </div>
+        <!--================= Wrapper End Here =================-->
+ 
+         
+        <!--================= Wrapper End Here =================-->
+ 
+        <!--================= Footer Section Start Here =================-->
+        <footer id="react-footer" class="react-footer react-footer-two pt---120">
+            <div class="footer-top">
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 md-mb-30">
+                            <div class="footer-widget footer-widget-1">
+                                <div class="footer-logo white">
+                                    <a href="index.html" class="logo-text"> <img src="assets/images/logo.png" alt="logo"></a>
+                                </div>
+                                <h5 class="footer-subtitle">Más que un equipo, somos una familia unida por la pasión por las matemáticas y la educación.</h5>
+                                <ul class="footer-address">
+                                    
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><a href="mailto:info@yourdmain.com"> sigmath.voluntariado@gmail.com </a></li>
+                                </ul>                               
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">  
+                <div class="container">                  
+                    <div class="react-copy-left">© 2026 Liliana Fernandez. All Rights Reserved</div>
+                    <div class="react-copy-right">
+                        <ul class="social-links">
+                            <li class="follow">Follow us</li>
+                            <li><a href="https://www.instagram.com/sigmath.pe/"><span aria-hidden="true" class="social_instagram"></span></a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--================= Footer Section End Here =================-->
+        
+        <!--================= Scroll to Top Start =================-->
+        <div id="backscrollUp">
+            <span aria-hidden="true" class="arrow_carrot-up"></span>
+        </div> 
+        <!--================= Scroll to Top End =================-->
+ 
+        <!--================= Jquery latest version =================-->
+        <script src="assets/js/jquery.min.js"></script>
+        <!--================= Modernizr js =================-->
+        <script src="assets/js/modernizr-2.8.3.min.js"></script>
+        <!--================= Bootstrap js =================-->
+        <script src="assets/js/bootstrap.min.js"></script>
+        <!--================= Owl Carousel js =================-->
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <!--================= Magnific Popup =================-->
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <!--================= Counter up js =================-->
+        <script src="assets/js/jquery.counterup.min.js"></script>
+        <script src="assets/js/waypoints.min.js"></script>
+        <!--================= Wow js =================-->
+        <script src="assets/js/wow.min.js"></script>     
+        <script src="assets/js/isotope.pkgd.min.js"></script>
+        <!--================= Imagesloaded.pkgd.min js =================-->
+        <script src="assets/js/imagesloaded.pkgd.min.js"></script>            
+        <!--================= menus js =================-->
+        <script src="assets/js/menus.js"></script>
+        <!--================= Plugins js =================-->
+        <script src="assets/js/plugins.js"></script>       
+		<!--================= Main js =================-->
+        <script src="assets/js/main.js"></script>
+        <script>
+            function switchTab(area, btn) {
+                // Hide all panels
+                document.querySelectorAll('.area-panel').forEach(p => p.classList.remove('active'));
+                // Remove active from all buttons
+                document.querySelectorAll('.area-tab-btn').forEach(b => b.classList.remove('active'));
+                // Show selected panel
+                document.getElementById('panel-' + area).classList.add('active');
+                // Mark button active
+                btn.classList.add('active');
+            }
+        </script>
+    </body>
+</html>
