@@ -7007,6 +7007,9 @@ ul {
   justify-content: center;  /* center horizontally too */
   text-align: center;
 }
+.jaja{
+  background-color: #7db0ff;
+}
 .react-breadcrumbs * {
   color: white !important;
 }
